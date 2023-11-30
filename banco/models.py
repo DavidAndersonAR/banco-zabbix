@@ -43,34 +43,59 @@ class DisponibilidadeHosts(models.Model):
         db_table = 'disponibilidade_hosts'
 
 
-class HostsAtivos(models.Model):
-    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    host = models.CharField(db_column='Host', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    ip = models.CharField(db_column='IP', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    acn = models.CharField(db_column='ACN', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    ambiente = models.CharField(db_column='Ambiente', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    critico = models.CharField(db_column='Critico', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    local = models.CharField(db_column='Local', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    ons = models.CharField(db_column='ONS', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    pais = models.CharField(db_column='Pais', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    sublocal = models.CharField(db_column='SubLocal', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    subtipo = models.CharField(db_column='SubTipo', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    tipo = models.CharField(db_column='Tipo', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    ambiente_relatorio = models.CharField(db_column='Ambiente_Relatorio', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    comunicacao = models.CharField(db_column='Comunicacao', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    escopo = models.CharField(db_column='Escopo', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    familia = models.CharField(db_column='Familia', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    filtros = models.CharField(db_column='Filtros', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    horario_relatorio = models.CharField(db_column='Horario_Relatorio', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    localidade = models.CharField(db_column='Localidade', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    operadora = models.CharField(db_column='Operadora', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    relatorio = models.CharField(db_column='Relatorio', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    servico = models.CharField(db_column='Servico', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    status = models.CharField(db_column='Status', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    tagrelatorio = models.CharField(db_column='TagRelatorio', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    tipo02 = models.CharField(db_column='Tipo02', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
-    empresa = models.CharField(db_column='Empresa', max_length=255, db_collation='latin1_swedish_ci', blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
-        managed = False
-        db_table = 'hosts_ativos'
+class Localidade(models.Model):
+    localidade = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.localidade
+
+class TipoLocal(models.Model):
+    tipo_local = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.tipo_local
+    
+class Pais(models.Model):
+    pais = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.pais
+
+class Empresa(models.Model):
+    empresa = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.empresa
+
+
+
+
+class HostsAtivosZB(models.Model):
+    id = models.IntegerField(primary_key=True)
+    host = models.CharField(max_length=100)
+    ip = models.CharField(max_length=50)  
+    acn = models.CharField(max_length=50)  
+    ambiente = models.CharField(max_length=50)  
+    critico = models.CharField(max_length=50)  
+    local = models.CharField(max_length=50)  
+    ons = models.CharField(max_length=50)  
+    pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, blank=True)
+    tipo_localidade = models.ForeignKey(TipoLocal, on_delete=models.SET_NULL, null=True)
+    subtipo = models.CharField(max_length=50)
+    tipo = models.CharField(max_length=50)  
+    ambiente_relatorio = models.CharField(max_length=50)
+    comunicacao = models.CharField(max_length=50)
+    escopo = models.CharField(max_length=50)  
+    familia = models.CharField(max_length=50)  
+    filtros = models.CharField(max_length=50)  
+    horario_relatorio = models.CharField(max_length=50)  
+    localidade = models.ForeignKey(Localidade, on_delete=models.SET_NULL, null=True, blank=True)
+    operadora = models.CharField(max_length=50)
+    relatorio = models.CharField(max_length=50)
+    servico = models.CharField(max_length=50)  
+    status = models.CharField(max_length=50)  
+    tagrelatorio = models.CharField(max_length=50)
+    tipo02 = models.CharField(max_length=50)  
+    empresa = models.ForeignKey(Empresa, on_delete=models.SET_NULL, null=True, blank=True)
+
