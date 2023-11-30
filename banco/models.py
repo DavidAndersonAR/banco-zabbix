@@ -1,9 +1,6 @@
 from django.db import models
 
 # Create your models here.
-
-
-
 class BancoAutor(models.Model):
     id = models.BigAutoField(primary_key=True)
     nome = models.CharField(max_length=50)
@@ -14,8 +11,6 @@ class BancoAutor(models.Model):
 
     def __str__(self):
         return self.nome
-
-
 class BancoMotivos(models.Model):
     id = models.BigAutoField(primary_key=True)
     descricao = models.CharField(max_length=200)
@@ -23,7 +18,6 @@ class BancoMotivos(models.Model):
     class Meta:
         managed = False
         db_table = 'banco_motivos'
-
 
 class DisponibilidadeHosts(models.Model):
     id = models.IntegerField()
@@ -37,41 +31,50 @@ class DisponibilidadeHosts(models.Model):
     motivos = models.ForeignKey(BancoMotivos, models.DO_NOTHING, blank=True, null=True)
     percentual_expurgo = models.CharField(max_length=45, blank=True, null=True)
     comentarios = models.CharField(max_length=45, blank=True, null=True)
-
     class Meta:
         managed = False
         db_table = 'disponibilidade_hosts'
 
-
-
-class Localidade(models.Model):
+class Pais(models.Model):
     id = models.IntegerField(primary_key=True)
-    localidade = models.CharField(max_length=50)
+    pais = models.CharField(max_length=50)
+    ativo = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return self.localidade
+        return self.pais
+class Empresa(models.Model):
+    id = models.IntegerField(primary_key=True)
+    pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
+    empresa = models.CharField(max_length=50)
+    sigla = models.CharField(max_length=50, null=True, blank=True)
+    catalogo = models.CharField(max_length=50, null=True, blank=True)
+    ativo = models.CharField(max_length=50, null=True, blank=True)
 
+    def __str__(self):
+        return self.empresa
+    
 class TipoLocal(models.Model):
+    id = models.IntegerField(primary_key=True)
+    pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
+    empresa = models.ForeignKey(Empresa, on_delete=models.SET_NULL, null=True)
     tipo_local = models.CharField(max_length=50)
+    sigla = models.CharField(max_length=50, null=True, blank=True)
+    ativo = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.tipo_local
     
-class Pais(models.Model):
-    pais = models.CharField(max_length=50)
+class Localidade(models.Model):
+    id = models.IntegerField(primary_key=True)
+    pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
+    empresa = models.ForeignKey(Empresa, on_delete=models.SET_NULL, null=True)
+    tipolocal = models.ForeignKey(TipoLocal, on_delete=models.SET_NULL, null=True)
+    localidade = models.CharField(max_length=50)
+    sigla = models.CharField(max_length=50, null=True, blank=True)
+    ativo = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return self.pais
-
-class Empresa(models.Model):
-    empresa = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.empresa
-
-
-
-
+        return self.localidade
 class HostsAtivosZB(models.Model):
     id = models.IntegerField(primary_key=True)
     host = models.CharField(max_length=100)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DisponibilidadeHosts, BancoAutor, BancoMotivos, HostsAtivosZB
+from .models import DisponibilidadeHosts, BancoAutor, BancoMotivos, HostsAtivosZB, TipoLocal, Pais, Empresa, Localidade
 
 class DisponibilidadeHostsAdmin(admin.ModelAdmin):
     list_display = ('id_banco', 'id', 'host', 'data_coleta', 'disponibilidade', 'disp_expurgada', 'status')
@@ -17,3 +17,8 @@ class HostsAtivosZBAdmin(admin.ModelAdmin):
 admin.site.register(HostsAtivosZB, HostsAtivosZBAdmin)
 admin.site.register(BancoAutor)
 admin.site.register(BancoMotivos)
+admin.site.register(TipoLocal)
+admin.site.register(Pais)
+admin.site.register(Empresa)
+admin.site.register(Localidade)
+
