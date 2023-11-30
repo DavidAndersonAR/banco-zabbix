@@ -45,6 +45,7 @@ class DisponibilidadeHosts(models.Model):
 
 
 class Localidade(models.Model):
+    id = models.IntegerField(primary_key=True)
     localidade = models.CharField(max_length=50)
 
     def __str__(self):
