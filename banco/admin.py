@@ -11,10 +11,15 @@ admin.site.register(DisponibilidadeHosts, DisponibilidadeHostsAdmin)
 class HostsAtivosZBAdmin(admin.ModelAdmin):
     list_display = ('id', 'host', 'localidade', 'local', 'status', 'horario_relatorio', 'comunicacao')
     list_filter = ('status', 'localidade')
-    search_fields = ['host', 'status', 'localidade']
+    search_fields = ['id', 'status']
+
+   
+    
 
 
 admin.site.register(HostsAtivosZB, HostsAtivosZBAdmin)
+
+
 admin.site.register(BancoAutor)
 admin.site.register(BancoMotivos)
 admin.site.register(TipoLocal)

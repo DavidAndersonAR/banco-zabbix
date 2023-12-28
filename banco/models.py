@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class BancoAutor(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -34,6 +35,10 @@ class DisponibilidadeHosts(models.Model):
     class Meta:
         managed = False
         db_table = 'disponibilidade_hosts'
+
+
+
+
 
 class Pais(models.Model):
     id = models.IntegerField(primary_key=True)
