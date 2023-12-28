@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from zabbix.views import hosts, ListUpdate, ListView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.hosts, name='hosts')
+    path('', hosts, name='hosts'),
+    path('host/<int:pk>/',ListView.as_view(), name='list_detail' ),
+    path('host/<int:pk>/update',ListUpdate.as_view(), name='update_detail' )
 ]

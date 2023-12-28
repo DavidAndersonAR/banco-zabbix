@@ -56,7 +56,7 @@ ROOT_URLCONF = 'banco_zabbix.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['banco_zabbix/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

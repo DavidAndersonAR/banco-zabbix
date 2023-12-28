@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block 'head' %}
-    <link rel="stylesheet" href="{% static 'clientes/css/clientes.css' %}">
+    <link rel="stylesheet" href="{% static 'hosts/css/hosts.css' %}">
 {% endblock %}
 
 {% block 'dashboard' %}
@@ -23,13 +23,90 @@
 </div>
 
 <div class="filtros">
-    dfdf
+    <div class="">
+
+        <div class="inner-div">
+            <form action="{% url 'hosts' %}" method="GET" class="input-group">
+
+                <div class="input-group mb-3" >
+                    <input type="text" class="form-control" placeholder="Hosts" aria-label="Recipient's username" aria-describedby="button-addon2" name="search">
+                    <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+        <div class="inner-div">
+            <form action="{% url 'hosts' %}" method="GET" class="input-group">
+                <!-- <input type="number" name="search_id" id="" placeholder="Id do host">
+                <input type="submit" value="Buscar"> -->
+
+                <div class="input-group mb-3" >
+                    <input type="text" class="form-control" placeholder="ID" aria-label="Recipient's username" aria-describedby="button-addon2" name="search_id">
+                    <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="inner-div">
+            <form action="{% url 'hosts' %}" method="GET" class="input-group">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Localidade" aria-label="Recipient's username" aria-describedby="button-addon2" name="localidade">
+                     <div class="input-group-append"> 
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+                    </div> 
+                </div>
+            </form>
+
+        </div>
+
+
+
+    </div>
+    
+
+
+
 
 </div>
 
 <div class="lista_hosts">
-    dfdf
-
+    <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">HOST</th>
+            <th scope="col">LOCALIDADE</th>
+            <th scope="col">LOCAL</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">AÇÕES</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% if hosts_ativos %}
+                {% for hosts in hosts_ativos %}
+                    <tr>                      
+                        <td><a href="">{{hosts.id}}</a></td>
+                        
+                        <td>{{hosts.host}}</td>
+                        <td>{{hosts.localidade}}</td>
+                        <td>{{hosts.local}}</td>
+                        <td>{{hosts.status}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger">Excluir</button>    
+                            <!-- <a href="{% url 'update_detail' pk=hosts.pk %}" class="btn btn-primary">Editar</a> -->
+                            <a href="{% url 'list_detail' pk=hosts.pk %}" class="btn btn-primary">Visualizar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+      </table>
 </div>
-
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'hosts/css/hosts.css' %}">
+{% endblock %}
+
+{% block 'dashboard' %}
+<div class="container">
+    <div class="row">
+    </div>
+</div>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="filtros">
+        <div class="">
+
+            <div class="inner-div">
+                <form action="{% url 'hosts' %}" method="GET" class="input-group">
+
+                    <div class="input-group mb-3" >
+                        <input type="submit" value="Salvar Alterações" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="lista_hosts">
+        <table>
+            {{ form.as_table }}
+        </table>
+    </div>
+</form>    
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'hosts/css/hosts.css' %}">
+{% endblock %}
+
+{% block 'dashboard' %}
+<div class="container">
+    <div class="row">
+
+    </div>
+</div>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="lista_hosts">
+        <table>
+            {{ form.as_table }}
+            <p>{{ object.ip }}</p>
+            <p>{{ object.host }}</p>
+            <p>{{ object.acn }}</p>
+            <p>{{ object.ambiente }}</p>
+            <p>{{ object.critico }}</p>
+            <p>{{ object.local }}</p>
+            <p>{{ object.ons }}</p>
+            <p>{{ object.pais }}</p>
+            <p>{{ object.tipo_localidade }}</p>
+            <p>{{ object.subtipo }}</p>
+            <p>{{ object.tipo }}</p>
+            <p>{{ object.ambiente_relatorio }}</p>
+            <p>{{ object.comunicacao }}</p>
+            <p>{{ object.escopo }}</p>
+            <p>{{ object.familia }}</p>
+            <p>{{ object.filtros }}</p>
+            <p>{{ object.horario_relatorio }}</p>
+            <p>{{ object.localidade }}</p>
+            <p>{{ object.operadora }}</p>
+            <p>{{ object.relatorio }}</p>
+            <p>{{ object.servico }}</p>
+            <p>{{ object.status }}</p>
+            <p>{{ object.tagrelatorio }}</p>
+            <p>{{ object.tipo02 }}</p>
+            <p>{{ object.empresa }}</p>
+        </table>
+    </div>
+
+    <div class="filtros">
+        <div class="">
+            <a href="{% url 'update_detail' pk=object.pk %}" class="btn btn-primary">Editar</a>
+            <div class="inner-div">
+                <form action="{% url 'update_detail' pk=object.pk %}" method="GET" class="input-group">
+
+                    <div class="input-group mb-3" >
+                        <input type="submit" value="Editar" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        
+    </div>
+</form>    
+{% endblock %}
